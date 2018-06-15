@@ -1,0 +1,29 @@
+syntax = "proto3";
+package routetable;
+
+
+service Router {
+  // GetNextHop(Subnet) is a simple RPC that will return the route to a given destination 
+    rpc GetRoute(Destination) returns (Route) {}
+
+    // AddRoutes() is a request-streaming RPC to add new routes to the routing table
+    rpc AddRoutes(stream Route) returns (Result) {}
+}
+
+// Define a route
+message Route {
+	string dest = 1;
+	string mask = 2;
+	string nh = 3;
+	int32 metric = 4;
+	string interface = 5;
+}
+
+message Destination {
+  string network = 1;
+  string mask = 2;
+}
+
+message Result {
+  bool success = 1;
+}

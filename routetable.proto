@@ -1,0 +1,16 @@
+syntax = "proto3";
+package routetable;
+
+// Define a route
+message Route {
+	string dest = 1;
+	string mask = 2;
+	string nh = 3;
+	int32 metric = 4;
+	string interface = 5;
+}
+
+// Define a routing table
+message RoutingTable {
+	repeated Route routes = 1;
+}
